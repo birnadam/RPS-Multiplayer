@@ -9,34 +9,43 @@
     </head>
 
     <body>
-        <!-- div asking for user's name -->
-        <div class="form-group">
-			<div class="input-group">		
-            <!-- form with placeholder "enter username to begin" -->
-                <input type="text" class="form-control name" placeholder="Enter username to begin" />
-            <!-- "begin" button -->
-                <span class="input-group-btn">
-                    <button class="btn btn-default ready" data-player="player1" type="button">Begin!</button>
-                </span>
-            </div>
-        </div>
-
         <!-- div row-->
         <div class ="row">
-            <!-- column 1/3 player's box -->
-            <div class="left">
-                <!-- player's username -->
-                <!-- buttons: "rock" "paper" & "scissors" -->
-                <!-- display choice -->
+            <!-- column 1/3 player 1's box -->
+            <div id="player1" class="player col-xs-5 col-md-5">
+            <div class="panel"><h3 class="player-title">Player:</h3></div>
+                <!-- div asking for user's name -->
+                <div class="form-group">
+                    <div class="input-group">
+                        <!-- form with placeholder "enter username" -->
+                        <input type="text" class="form-control name" placeholder="Enter username" />		
+                        <span class="input-group-btn">
+                            <!-- "join" button -->
+                            <button class="btn btn-default ready" data-player="player1" type="button">Join!</button>
+                        </span>
+                    </div>
+                </div>
+                <div class="panel panel-default moves">
+                    <div class="panel-heading">
+                        <h1 class="move-text small">Join the game to play.</h1>
+                    </div>
+                    <!-- buttons: "rock" "paper" & "scissors" -->
+                    <div class="panel-body">
+                        <button class="move btn btn-primary" data-move="rock" disabled="true">Rock</button>
+                        <button class="move btn btn-default" data-move="paper" disabled="true">Paper</button>
+                        <button class="move btn btn-info" data-move="scissors" disabled="true">Scissors</button>			
+                    </div>
+                </div>
             </div>
+
             <!-- column 2/3 (small) table -->
-            <div class="middle">
+            <div id="middle" class="col-xs-2 col-md-2">
                 <table class="table table-sm">
                     <thead>
                         <tr><!-- player/opponent columns -->
                             <th scope="col"></th>
-                            <th scope="col">Player</th>
-                            <th scope="col">Opponent</th>
+                            <th scope="col">Player1</th>
+                            <th scope="col">Player2</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -58,10 +67,32 @@
                     </tbody>
                 </table>
             </div>
-            <div class="right">
-            <!-- column 3/3 opponent's box -->
-                <!-- opponent's username -->
-                <!-- display choice -->
+
+            <!-- column 3/3 player2's box -->
+            <div id="player2" class="player col-xs-5 col-md-5">
+            <div class="panel"><h3 class="player-title">Player:</h3></div>
+                <!-- div asking for user's name -->
+                <div class="form-group">
+                    <div class="input-group">
+                        <!-- form with placeholder "enter username" -->
+                        <input type="text" class="form-control name" placeholder="Enter username" />		
+                        <span class="input-group-btn">
+                            <!-- "join" button -->
+                            <button class="btn btn-default ready" data-player="player2" type="button">Join!</button>
+                        </span>
+                    </div>
+                </div>
+                <div class="panel panel-default moves">
+                    <div class="panel-heading">
+                        <h1 class="move-text small">Join the game to play.</h1>
+                    </div>
+                    <!-- buttons: "rock" "paper" & "scissors" -->
+                    <div class="panel-body">
+                        <button class="move btn btn-primary" data-move="rock" disabled="true">Rock</button>
+                        <button class="move btn btn-default" data-move="paper" disabled="true">Paper</button>
+                        <button class="move btn btn-info" data-move="scissors" disabled="true">Scissors</button>			
+                    </div>
+                </div>
             </div>
         </div>
 

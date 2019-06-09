@@ -1,13 +1,16 @@
 .form-group{
-    display: block;
-    width: 60%;
-    margin-left: auto;
-    margin-right: auto;
+    width: 59%;
 }
+
 .form-control {
     background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
     font-weight: bold;
     font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+    font-size: 12px;
+}
+
+.ready, #send {
+    font-size: 12px;
 }
 
 .btn {
@@ -20,13 +23,9 @@
     background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
 }
 
-.left, .right {
-    width: 40%;
-}
-
-.middle {
-    font-size: 8px;
-    width: 10%;
+.player {
+    margin-bottom: 2%;
+    right: -7.5%;
 }
 
 body {
