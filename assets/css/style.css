@@ -19,3 +19,15 @@
 .ready:hover {
     background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
 }
+
+.left {
+    width: 40%;
+}
+
+.middle {
+    width: 15%;
+}
+
+.right {
+    width: 40%;
+}
