@@ -1,6 +1,6 @@
 .form-group{
     display: block;
-    width: 60%;
+    width: 75%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -20,7 +20,7 @@
     background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
 }
 
-.left {
+.left, .right {
     width: 40%;
 }
 
@@ -28,6 +28,14 @@
     width: 15%;
 }
 
-.right {
-    width: 40%;
+body {
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+}
+
+.alert {
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+    display: block;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
 }
