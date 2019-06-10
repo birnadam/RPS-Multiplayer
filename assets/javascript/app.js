@@ -79,6 +79,16 @@ rps = {
         });
 
         //function to take in player's RPS choice
+        $(".move").on("click", function(b) {
+            let curPlayer = $(e.target.offsetParent).attr('id');
+            //add move to 'last move' property
+            rps.players[curPlayer].lastMove = $(b.target).attr("data-move");
+            //hide other moves until round is over
+            $('#' + rps.playerDes + " .move").not($(e.target)).hide();
+            //send players to firebase
+            playersDB.set(rps.players);
+        });
+
         playersDB.on('value', function(data){
             //wipe local data if nothing in DB
             if(data.val()==null){                   
@@ -149,32 +159,32 @@ rps = {
                 $('#' + curPlayer + ' .form-group').slideUp();
                 $('.move-text').html("Waiting for another player");
                 $('.moves :button').attr('disabled', true);   
-            }
-             
-            //names on scoreboard
-            if (rps.players.player1 != null){
-                $(".p1").text(rps.players.player1.name);
-            }
-            if (rps.players.player2 != null){
-                $(".p2").text(rps.players.player2.name);
-            }
 
-            //win losses and ties on scoreboard
-            if (rps.players.player1.wins != 0){
-                $(".p1win").text(rps.players.player1.wins);
-            }if (rps.players.player1.losses != 0){
-                $(".p1loss").text(rps.players.player1.losses);
-            }if (rps.players.player1.ties != 0){
-                $(".p1tie").text(rps.players.player1.ties);
+                //names on scoreboard
+                if (rps.players.player1 != null){
+                    $(".p1").text(rps.players.player1.name);
+                }
+                if (rps.players.player2 != null){
+                    $(".p2").text(rps.players.player2.name);
+                }
+
+                //win losses and ties on scoreboard
+                if (rps.players.player1.wins != null){
+                    $(".p1win").text(rps.players.player1.wins);
+                }if (rps.players.player1.losses != 0){
+                    $(".p1loss").text(rps.players.player1.losses);
+                }if (rps.players.player1.ties != 0){
+                    $(".p1tie").text(rps.players.player1.ties);
+                }
+                if (rps.players.player2.wins != null){
+                    $(".p2win").text(rps.players.player2.wins);
+                }if (rps.players.player2.losses != 0){
+                    $(".p2loss").text(rps.players.player2.losses);
+                }if (rps.players.player2.ties != 0){
+                    $(".p2tie").text(rps.players.player2.ties);
+                }      
+                rps.checkPlayers();
             }
-            if (rps.players.player2.wins != 0){
-                $(".p2win").text(rps.players.player2.wins);
-            }if (rps.players.player2.losses != 0){
-                $(".p2loss").text(rps.players.player2.losses);
-            }if (rps.players.player2.ties != 0){
-                $(".p2tie").text(rps.players.player2.ties);
-            }   
-            rps.checkPlayers();
         }
     },
 
@@ -273,9 +283,9 @@ rps = {
         rps.refresh();                              //enable move buttons
         playersDB.set(rps.players);                  //send new data to firebase
     },
+
     //need this to hold empty space
     players: { player1: null, player2: null },
-
 }
 
 //run the rps Object
