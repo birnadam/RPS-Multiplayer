@@ -40,6 +40,7 @@ body {
     margin-right: auto;
 }
 
-.messages ul {
-    height: 100px;
+.input-group {
+    margin-bottom: 2%;
 }
+
