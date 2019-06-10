@@ -16,29 +16,6 @@ rps = {
     playerDes: "",
     playersDB: "",
     msgesDB: "",
-    
-    //player class to hold player data 
-        //(name, wins, losses, ties, last move)
-    player: function(name) {
-        this.name = name;
-        this.wins = 0;
-        this.losses = 0;
-        this.ties = 0;
-        this.lastMove = "";
-    },
-
-    //message class to create objects for each msg
-        //(who sent the message and what did they say)
-    message: function(chat, sender = 'anonymous') {
-        if(sender!='admin'){
-            if (rps.playerDes != ""){
-                sender = rps.playerDes;
-            }
-        }
-        this.sender = sender
-        this.message = chat;
-        this.time = new Date().toLocaleTimeString();
-    },
         
     //initialize the app with firebase to be able to store information
     init: function() {
@@ -187,32 +164,7 @@ rps = {
             }
         }
     },
-
-    //how to style the message
-    showMessage: function(message){
-        let style="";
-        switch (message.sender){
-            case 'anonymous':
-                style = 'anonymous';
-                break;
-            case 'admin':
-                style = 'anonymous';
-                break;
-            case rps.playerDes:
-                style = 'left';
-                break;
-            default:
-                style = 'right';
-        }
-        //add message to our messages list
-        $('.messages ul').append($('<li class="li-' + style +'">').html(
-            '<span class="li-message">' + message.message + '</span>' +
-            '<span class="li-username">- ' + message.sender + " | " + 
-            message.time + '</span>'));
-        //scroll to the bottom
-        $(".messages").animate({scrollTop: $(".messages").prop("scrollHeight")}, 1000);
-    },
-
+   
     //function to enable RPS buttons when there are two players
     checkPlayers: function() {
         for (key in rps.players) {
@@ -284,6 +236,53 @@ rps = {
         playersDB.set(rps.players);                  //send new data to firebase
     },
 
+    //how to style the message
+    showMessage: function(message){
+        let style="";
+        switch (message.sender){
+            case 'anonymous':
+                style = 'anonymous';
+                break;
+            case 'admin':
+                style = 'anonymous';
+                break;
+            case rps.playerDes:
+                style = 'left';
+                break;
+            default:
+                style = 'right';
+        }
+        //add message to our messages list
+        $('.messages ul').append($('<li class="li-' + style +'">').html(
+            '<span class="li-message">' + message.message + '</span>' +
+            '<span class="li-username">- ' + message.sender + " | " + 
+            message.time + '</span>'));
+        //scroll to the bottom
+        $(".messages").animate({scrollTop: $(".messages").prop("scrollHeight")}, 1000);
+    },
+
+    //player class to hold player data 
+        //(name, wins, losses, ties, last move)
+    player: function(name) {
+        this.name = name;
+        this.wins = 0;
+        this.losses = 0;
+        this.ties = 0;
+        this.lastMove = "";
+    },
+    
+    //message class to create objects for each msg
+        //(who sent the message and what did they say)
+    message: function(chat, sender = 'anonymous') {
+        if(sender!='admin'){
+            if (rps.playerDes != ""){
+                sender = rps.playerDes;
+            }
+        }
+        this.sender = sender
+        this.message = chat;
+        this.time = new Date().toLocaleTimeString();
+    },
     //need this to hold empty space
     players: { player1: null, player2: null },
 }
