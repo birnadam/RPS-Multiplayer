@@ -205,32 +205,76 @@ rps = {
         $(".messages").animate({scrollTop: $(".messages").prop("scrollHeight")}, 10);
     },
 
-        //function to enable RPS buttons when there are two players
-        checkPlayers: function() {
-            for (key in rps.players) {
-                if (rps.players[key] == null) {
-                    //disable buttons if there's not two players
-                    $("#" + key + " .moves :button").attr('disabled', true);
-                    //when we have our players
-                } else if (rrs.numPlayers > 1) {        
-                    //only enable move buttons for current player
-                    $("#" + rrs.playerDes + " .moves :button").removeAttr('disabled');
-                    $('#' + key + ' .move-text').html("Make your move:");
-                    $('#' + key + ' .player-title').html("Player Name: " + rps.players[key].name);
+    //function to enable RPS buttons when there are two players
+    checkPlayers: function() {
+        for (key in rps.players) {
+            if (rps.players[key] == null) {
+                //disable buttons if there's not two players
+                $("#" + key + " .moves :button").attr('disabled', true);
+                //when we have our players
+            } else if (rps.numPlayers > 1) {        
+                //only enable move buttons for current player
+                $("#" + rps.playerDes + " .moves :button").removeAttr('disabled');
+                $('#' + key + ' .move-text').html("Make your move:");
+                $('#' + key + ' .player-title').html("Player Name: " + rps.players[key].name);
+            }
+        }
+    },
+
+    //make all buttons visible
+    refresh: function(){
+        $('.moves :button').show();
+    },
+
+    //function to calculate who won based on "last move" property
+    getResult: function() {
+        rps.refresh();
+        if(rps.players['player1'].lastMove === rps.players['player2'].lastMove){
+            rps.winner('tied');
+        } else {
+            switch(rps.players['player1'].lastMove){
+                case 'rock':
+                if(rps.players['player2'].lastMove === 'paper'){
+                    rps.winner('player2');
+                } else{rps.winner('player1')}
+                break;
+                case 'paper':
+                if(rps.players['player2'].lastMove === 'scissors'){
+                    rps.winner('player2');
+                } else{rps.winner('player1')}
+                break;
+                case 'scissors':
+                if(rps.players['player2'].lastMove === 'rock'){
+                    rps.winner('player2');
+                } else{rps.winner('player1')}
+                break;
+            }
+        }
+    },
+    
+    //called by getResult to update wins and losses and show in UI
+    winner: function(aPlayer){
+            if (aPlayer === 'tied'){
+                $('.result').html("You both tied with " + 
+                    rps.players[rps.playerDes].lastMove);
+                for(curPlayer in rps.players){
+                    rps.players[curPlayer].lastMove = "";
+                    rps.players[curPlayer].ties++;
+                }
+            } else{
+                $('.result').html(rps.players[aPlayer].name + " won with " + 
+                    rps.players[aPlayer].lastMove);
+                rps.players[aPlayer].wins++;
+                for(curPlayer in rps.players){
+                    rps.players[curPlayer].lastMove = "";
+                    if (curPlayer != aPlayer){
+                        rps.players[curPlayer].losses++;
                 }
             }
-        },
-
-        //make all buttons visible
-        refresh: function(){
-            $('.moves :button').show();
-        },
-
-        //function to calculate who won based on "last move" property
-
-        //function to update results, wins, losses, and ties in UI
-        getResult: function() {
-    },           
+        }
+        rps.refresh();                              //enable move buttons
+        playersDB.set(rps.players);                  //send new data to firebase
+    },
 }
 
 //run the rps Object
