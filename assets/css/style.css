@@ -44,3 +44,9 @@ body {
     margin-bottom: 2%;
 }
 
+.bgimg {
+    background: url("../images/rpsBG.png");
+    background-repeat: no-repeat;
+    background-position-y: 20%;
+}
+
