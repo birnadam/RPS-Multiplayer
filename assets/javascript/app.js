@@ -61,7 +61,7 @@ rps = {
             //add move to 'last move' property
             rps.players[curPlayer].lastMove = $(b.target).attr("data-move");
             //hide other moves until round is over
-            $('#' + rps.playerDes + " .move").not($(e.target)).hide();
+            $('#' + rps.playerDes + " .move").not($(b.target)).hide();
             //send players to firebase
             playersDB.set(rps.players);
         });
