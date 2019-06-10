@@ -81,23 +81,48 @@ rps = {
         });
 
         //function to take in player's RPS choice
-            //store the player's moves
-            //check if both players have went
-            //get result
-            //update UI with the correct changes
+        playersDB.on('value', function(data){
+            //wipe local data if nothing in DB
+            if(data.val()==null){                   
+                players = { 
+                    player1: null, 
+                    player2: null 
+                };
+            }else{
+                rps.players = data.val();           
+                rps.numPlayers = Object.keys(data.val()).length;
+                //check if we have two players
+                if(rps.numPlayers>1){              
+                    let moveFlag = true;
+                    //check if both players have went
+                    for(key in rps.players){        
+                        if (rps.players[key].lastMove === ""){
+                            moveFlag=false;         
+                            break;
+                        }
+                    }
+                    //get result
+                    if (moveFlag) {
+                            rps.getResult();        
+                    }
+                }
+                //update UI with the correct changes     
+                rps.updatePlayers();                
+            }
+        }, function(error){alert("Error! Cannot compute!")});
 
         //chatroom functionality
         msgesDB.on('child_added',                
         function(data){    
             //show on chatbox
             rps.showMessage(data.val());        
-            }, function(e){
+            }, function(b){
             alert("You have been disconnected");
         });
 
-        $('#send').on('click', function(e){
+        $('#send').on('click', function(b){
             //prevent page refresh
-            e.preventDefault();     
+            b.preventDefault();     
             let message = $('#message-input').val().trim();
             if(message===""){
                 alert("Cannot send blank message") 
@@ -184,7 +209,8 @@ rps = {
         //function to calculate who won based on "last move" property
 
         //function to update results, wins, losses, and ties in UI
-               
+        getResult: function() {
+    },           
 }
 
 //run the rps Object
