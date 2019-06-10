@@ -57,7 +57,7 @@ rps = {
 
         //function to take in player's RPS choice
         $(".move").on("click", function(b) {
-            let curPlayer = $(e.target.offsetParent).attr('id');
+            let curPlayer = $(b.target.offsetParent).attr('id');
             //add move to 'last move' property
             rps.players[curPlayer].lastMove = $(b.target).attr("data-move");
             //hide other moves until round is over
