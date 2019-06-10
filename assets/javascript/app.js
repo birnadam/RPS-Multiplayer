@@ -135,6 +135,22 @@ rps = {
             if (rps.players.player2 != null){
                 $(".p2").text(rps.players.player2.name);
             }
+
+            //win losses and ties on scoreboard
+            if (rps.players.player1.wins != 0){
+                $(".p1win").text(rps.players.player1.wins);
+            }if (rps.players.player1.losses != 0){
+                $(".p1loss").text(rps.players.player1.losses);
+            }if (rps.players.player1.ties != 0){
+                $(".p1tie").text(rps.players.player1.ties);
+            }
+            if (rps.players.player2.wins != 0){
+                $(".p2win").text(rps.players.player2.wins);
+            }if (rps.players.player2.losses != 0){
+                $(".p2loss").text(rps.players.player2.losses);
+            }if (rps.players.player2.ties != 0){
+                $(".p2tie").text(rps.players.player2.ties);
+            }   
         }
     },
 
