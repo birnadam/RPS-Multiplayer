@@ -50,3 +50,9 @@ body {
     background-position-y: 20%;
 }
 
+#middle {
+    display: block;
+    width: 85%;
+    margin-left:auto;
+    margin-right: auto;
+}
