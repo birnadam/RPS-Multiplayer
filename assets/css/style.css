@@ -47,7 +47,6 @@ body {
 .bgimg {
     background: url("../images/rpsBG.png");
     background-repeat: no-repeat;
-    background-position-y: 20%;
 }
 
 #middle {

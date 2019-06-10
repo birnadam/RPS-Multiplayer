@@ -16,9 +16,7 @@ rps = {
     playerDes: "",
     playersDB: "",
     msgesDB: "",
-    //need this to hold empty space
-    players: { player1: null, player2: null },
-
+    
     //player class to hold player data 
         //(name, wins, losses, ties, last move)
     player: function(name) {
@@ -202,7 +200,7 @@ rps = {
             '<span class="li-username">- ' + message.sender + " | " + 
             message.time + '</span>'));
         //scroll to the bottom
-        $(".messages").animate({scrollTop: $(".messages").prop("scrollHeight")}, 10);
+        $(".messages").animate({scrollTop: $(".messages").prop("scrollHeight")}, 1000);
     },
 
     //function to enable RPS buttons when there are two players
@@ -275,6 +273,9 @@ rps = {
         rps.refresh();                              //enable move buttons
         playersDB.set(rps.players);                  //send new data to firebase
     },
+    //need this to hold empty space
+    players: { player1: null, player2: null },
+
 }
 
 //run the rps Object
