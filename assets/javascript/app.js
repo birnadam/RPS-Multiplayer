@@ -40,7 +40,6 @@ rps = {
         this.sender = sender
         this.message = chat;
         this.time = new Date().toLocaleTimeString();
-        console.log(this.sender +":"+ chat);
     },
         
     //initialize the app with firebase to be able to store information
@@ -87,6 +86,29 @@ rps = {
             //get result
             //update UI with the correct changes
 
+        //chatroom functionality
+        msgesDB.on('child_added',                
+        function(data){    
+            //show on chatbox
+            rps.showMessage(data.val());        
+            }, function(e){
+            alert("You have been disconnected");
+        });
+
+        $('#send').on('click', function(e){
+            //prevent page refresh
+            e.preventDefault();     
+            let message = $('#message-input').val().trim();
+            if(message===""){
+                alert("Cannot send blank message") 
+            } else{
+            //show msges on interface once sent
+            msgesDB.push(
+                new rps.message(message));
+            }
+            //clear msg box in UI
+            $('message-input').val("");
+        });
     },
 
     //function to update player data
@@ -116,13 +138,30 @@ rps = {
         }
     },
 
-        //chatroom functionality
-            //prevent page refresh
-            //show msges on interface once sent
-            //prevent blank messages
-            //make message object
-            //clear msg box in UI
-        
+    //how to style the message
+    showMessage: function(message){
+        let style="";
+        switch (message.sender){
+            case 'anonymous':
+                style = 'anonymous';
+                break;
+            case 'admin':
+                style = 'anonymous';
+                break;
+            case rps.playerDes:
+                style = 'left';
+                break;
+            default:
+                style = 'right';
+        }
+        //add message to our messages list
+        $('.messages ul').append($('<li class="li-' + style +'">').html(
+            '<span class="li-message">' + message.message + '</span>' +
+            '<span class="li-username">- ' + message.sender + " | " + 
+            message.time + '</span>'));
+        //scroll to the bottom
+        $(".messages").animate({scrollTop: $(".messages").prop("scrollHeight")}, 1000);
+    },
 
         //function to enable RPS buttons when there are two players
 
