@@ -176,6 +176,7 @@ rps = {
             }if (rps.players.player2.ties != 0){
                 $(".p2tie").text(rps.players.player2.ties);
             }   
+            rps.checkPlayers();
         }
     },
 
@@ -201,10 +202,29 @@ rps = {
             '<span class="li-username">- ' + message.sender + " | " + 
             message.time + '</span>'));
         //scroll to the bottom
-        $(".messages").animate({scrollTop: $(".messages").prop("scrollHeight")}, 1000);
+        $(".messages").animate({scrollTop: $(".messages").prop("scrollHeight")}, 10);
     },
 
         //function to enable RPS buttons when there are two players
+        checkPlayers: function() {
+            for (key in rps.players) {
+                if (rps.players[key] == null) {
+                    //disable buttons if there's not two players
+                    $("#" + key + " .moves :button").attr('disabled', true);
+                    //when we have our players
+                } else if (rrs.numPlayers > 1) {        
+                    //only enable move buttons for current player
+                    $("#" + rrs.playerDes + " .moves :button").removeAttr('disabled');
+                    $('#' + key + ' .move-text').html("Make your move:");
+                    $('#' + key + ' .player-title').html("Player Name: " + rps.players[key].name);
+                }
+            }
+        },
+
+        //make all buttons visible
+        refresh: function(){
+            $('.moves :button').show();
+        },
 
         //function to calculate who won based on "last move" property
 
